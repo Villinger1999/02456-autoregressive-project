@@ -1,5 +1,3 @@
-
-from protgen.data import ProteinDataset
 import torch
 import torch.nn.functional as F
 
@@ -20,4 +18,5 @@ class ProteinMLP(nn.Module):
         x = self.output(x)
 
         return F.softmax(x)
-
+    
+    
