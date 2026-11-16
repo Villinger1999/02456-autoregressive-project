@@ -9,7 +9,8 @@
 #BSUB -e hpc/logs/plot_mlp.err
 
 set -eu
-cd /path/to/your/project
+cd "/dtu/blackhole/1d/187261/02456-autoregressive-project"
+source hpc/env.sh
 
 uv run --group eval python eval/plot_structure.py \
     results/eval/mlp/pdb \
