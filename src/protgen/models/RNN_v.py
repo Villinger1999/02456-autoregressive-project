@@ -34,14 +34,8 @@ class ProteinRNN(nn.Module):
 
 ROOT = Path(__file__).resolve().parents[3]   # models -> protgen -> src -> project root
 
-
 @torch.no_grad()
 def evaluate(model, loader, device):
-    """Loss (nats/token), perplexity and top-1 accuracy over every real target token in loader.
-
-    Sums over tokens rather than averaging per batch, so long and short sequences and a smaller
-    last batch all count by the number of tokens they contain.
-    """
     model.eval()
     total_loss, correct, count = 0.0, 0, 0
     for x, x_shifted, y, length in loader:
@@ -54,7 +48,6 @@ def evaluate(model, loader, device):
         count += mask.sum().item()
     loss = total_loss / count
     return {"loss": loss, "ppl": math.exp(loss), "acc": correct / count}
-
 
 if __name__ == "__main__":
     train_ds = ProteinDataset(ROOT / "data/train.csv")
